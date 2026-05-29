@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
+  "https://biblioteca-frontend-deploy.vercel.app",
 ].filter(Boolean);
 
 app.use(cors({
@@ -26,7 +27,8 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(null, false);
+
+    return callback(new Error("No permitido por CORS"));
   },
   credentials: true,
 }));
